@@ -1,25 +1,23 @@
 <template>
-    <div class="name">{{post.title}}</div>
-    <div class="author">{{post.author}}</div>
+    home
+    <router-link to="/hah">hello</router-link>
+
 </template>
 
 <script>
 import axios from 'axios';
+import {ref} from 'vue';
 
 export default {
     name: 'page-home',
-    data() {
+    async setup() {
+        await new Promise((r) => setTimeout(r, 2000))
+        const env = "http://localhost:8000";
+        const data = ref(null);
+        const response = await axios.get(`${env}/posts/1`);
+        data.value = response.data;
         return {
-            post: {}
-        }
-    },
-    mounted() {
-        this.exec();
-    },
-    methods: {
-        async exec() {
-            const response = await axios.get(`${this.env}/posts/1`);
-            this.post = response.data;
+        data
         }
     }
 }

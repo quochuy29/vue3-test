@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '../components/HomePage.vue';
+function lazyLoad(view){
+    return() => import(`@/components/${view}.vue`)
+}
 
 const routes = [
     {
         path: '/haha',
-        component: HomePage
+        component: lazyLoad('HomePage')
+    },
+    {
+        path: '/hah',
+        component: lazyLoad('HelloWorld')
     }
 ];
 
